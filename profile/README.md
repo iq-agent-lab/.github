@@ -235,14 +235,14 @@ graph TD
 
 </details>
 
-### New Tools — 미래 계획
+### New Tools — 우선순위
 
-도구 확장의 우선순위:
+도구 확장 순서:
 
-1. **iq-blogger 안정화** (현재) — 첫 도구의 완성도를 100%로
-2. **iq-writer / iq-painter** (~2027 Q1) — 텍스트·이미지 도메인 확장
-3. **iq-label / iq-studio** (~2027 Q3) — 멀티미디어 도메인 진입
-4. **iq-curator** (~2028) — 모든 도구의 통합 오케스트레이터
+1. **iq-blogger 안정화** — 첫 도구의 완성도를 100%로
+2. **iq-writer / iq-painter** — 텍스트·이미지 도메인 확장
+3. **iq-label / iq-studio** — 멀티미디어 도메인 진입
+4. **iq-curator** — 모든 도구의 통합 오케스트레이터
 
 각 단계는 이전 도구의 **운영 메트릭**으로 검증된 후에만 다음으로 진행합니다.
 
