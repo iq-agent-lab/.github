@@ -9,7 +9,7 @@
 
 <br/>
 
-[![IQ Agent Lab](https://img.shields.io/badge/IQ_Agent_Lab-iq--agent--lab-cc785c?style=for-the-badge&logo=anthropic&logoColor=white)](https://github.com/iq-agent-lab)
+[![IQ Agent Lab](https://img.shields.io/badge/IQ_Agent_Lab-iq--agent--lab.github.io-cc785c?style=for-the-badge&logo=anthropic&logoColor=white)](https://iq-agent-lab.github.io)
 
 <br/>
 
@@ -306,9 +306,9 @@ graph LR
 
 | Lab | 역할 | 관계 |
 |-----|------|------|
-| [iq-dev-lab](https://github.com/iq-dev-lab) | 백엔드 시스템·인프라 deep-dive | 인프라 기반 제공 |
-| [iq-ai-lab](https://github.com/iq-ai-lab) | AI 이론·수학적 기반 deep-dive | 이론 기반 제공 |
-| **iq-agent-lab** | 에이전트 시스템·자동화 인프라 | **이론과 시스템을 통합** |
+| [iq-dev-lab](https://iq-dev-lab.github.io) | 백엔드 시스템·인프라 deep-dive | 인프라 기반 제공 |
+| [iq-ai-lab](https://iq-ai-lab.github.io) | AI 이론·수학적 기반 deep-dive | 이론 기반 제공 |
+| **[iq-agent-lab](https://iq-agent-lab.github.io)** | 에이전트 시스템·자동화 인프라 | **이론과 시스템을 통합** |
 
 세 연구소는 각자의 영역에서 독립적이지만 본질적으로 연결됩니다. AI 이론이 에이전트의 두뇌가 되고, 백엔드 시스템이 그 인프라가 되며, 에이전트가 다시 모든 연구소의 콘텐츠를 자동화합니다.
 
