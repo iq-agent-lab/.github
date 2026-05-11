@@ -35,7 +35,7 @@
 <td width="50%" valign="top">
 
 ### 🤖 iq-blogger
-![Status](https://img.shields.io/badge/status-development-cc785c?style=flat-square)
+![Status](https://img.shields.io/badge/status-active-22c55e?style=flat-square)
 
 **도메인** · 텍스트 (기술 블로그)
 
@@ -50,6 +50,26 @@ Deep-dive 문서를 블로그 포스트로 자동 변환하는 에이전트.
 **현재** · 첫 검증 사례 [iq-proof](https://iq-proof.github.io)에서 운영
 
 </td>
+<td width="50%" valign="top">
+
+### 🪐 iq-leetbuddy
+![Status](https://img.shields.io/badge/status-active-22c55e?style=flat-square)
+
+**도메인** · 학습 자동화 (LeetCode 풀이)
+
+LeetCode 풀이를 한국어로 번역하고, AI 회고를 붙여 GitHub에 자동 정리하는 **데스크톱 에이전트**.
+
+**Pipeline**
+- Input: 문제 URL / slug / 이름
+- Process: 한국어 번역 → 풀이 → AI 회고 (복잡도·대안·유사문제) → atomic commit
+- Output: 학습 자산으로 정리된 풀이 레포
+
+**검증** · 입력 fuzzy matching, GitHub 자동 진단, 언어별 폴더 분리
+**현재** · v0.3.4 [Releases](https://github.com/iq-agent-lab/iq-leetbuddy/releases/latest) — macOS / Windows / Linux 빌드 자동 배포
+
+</td>
+</tr>
+<tr>
 <td width="50%" valign="top">
 
 ### 🎵 iq-label
@@ -68,8 +88,6 @@ Deep-dive 문서를 블로그 포스트로 자동 변환하는 에이전트.
 **계획** · 첫 운영: 인디 음악 레이블
 
 </td>
-</tr>
-<tr>
 <td width="50%" valign="top">
 
 ### ✍️ iq-writer
@@ -88,6 +106,8 @@ Deep-dive 문서를 블로그 포스트로 자동 변환하는 에이전트.
 **계획** · 단편소설 → 장편 → 시리즈
 
 </td>
+</tr>
+<tr>
 <td width="50%" valign="top">
 
 ### 🎨 iq-painter
@@ -106,8 +126,6 @@ Deep-dive 문서를 블로그 포스트로 자동 변환하는 에이전트.
 **계획** · 블로그 일러스트 → 그림책 → 그래픽 노블
 
 </td>
-</tr>
-<tr>
 <td width="50%" valign="top">
 
 ### 🎬 iq-studio
@@ -126,6 +144,8 @@ Deep-dive 문서를 블로그 포스트로 자동 변환하는 에이전트.
 **계획** · 기술 해설 영상부터
 
 </td>
+</tr>
+<tr>
 <td width="50%" valign="top">
 
 ### 🌐 iq-curator
@@ -142,6 +162,20 @@ Deep-dive 문서를 블로그 포스트로 자동 변환하는 에이전트.
 
 **검증** · 채널별 적합성, 시점, 우선순위
 **계획** · 모든 도구 통합 후 마지막 단계
+
+</td>
+<td width="50%" valign="top">
+
+### 🔬 next planet
+![Status](https://img.shields.io/badge/status-incoming-cc785c?style=flat-square)
+
+**도메인** · 미정
+
+iq-agent-lab은 1년에 도구 한두 개씩 자라는 살아있는 시스템입니다.
+
+다음 행성은 운영 메트릭과 새로운 학습 영역에 따라 결정됩니다.
+
+iq-blogger의 텍스트 양산이 안정되고, iq-leetbuddy의 학습 사이클이 다양한 문제로 검증되면, 그 다음 도메인이 자연스럽게 떠오를 것입니다.
 
 </td>
 </tr>
@@ -173,10 +207,10 @@ graph TD
 | Stage | 활동 | 산출물 |
 |-------|------|--------|
 | 📚 **Research** | 도메인별 deep-dive, 시스템 패턴 추출 | 연구 레포 |
-| 🛠️ **Tools** | 이론을 동작하는 도구로 구현 | iq-blogger 등 |
-| 🚀 **Operations** | 도구를 실제 운영 시스템으로 통합 | iq-proof 등 |
+| 🛠️ **Tools** | 이론을 동작하는 도구로 구현 | iq-blogger, iq-leetbuddy 등 |
+| 🚀 **Operations** | 도구를 실제 운영 시스템으로 통합 | iq-proof, leetcode-solutions 등 |
 
-운영 경험은 다시 새로운 연구 질문이 됩니다. 글 1개를 만드는 것과 500개를 만드는 것은 본질적으로 다른 문제이고, 한 도메인을 자동화한 경험은 다른 도메인의 설계에 적용됩니다.
+운영 경험은 다시 새로운 연구 질문이 됩니다. 글 1개를 만드는 것과 500개를 만드는 것은 본질적으로 다른 문제이고, 한 도메인을 자동화한 경험은 다른 도메인의 설계에 적용됩니다. iq-blogger에서 만든 *컨스트레인트 + 검증 + 재시도* 패턴이 iq-leetbuddy에서 *친절한 에러 + 자동 복구* 패턴으로 진화한 것이 좋은 예시입니다.
 
 ---
 
@@ -187,12 +221,13 @@ graph TD
 | 시스템 | 도구 | 상태 | 첫 메트릭 |
 |--------|------|------|-----------|
 | [iq-proof](https://iq-proof.github.io) | iq-blogger | 🟢 Active | 500+ posts (target) |
+| [leetcode-solutions](https://github.com/e9ua1/leetcode-solutions) | iq-leetbuddy | 🟢 Active | 풀이 + 한국어 회고 누적 |
 | iq-label sound | iq-label | ⚪ Planned | 인디 음악 레이블 |
 | iq-narrative | iq-writer | ⚪ Planned | 단편 소설 시리즈 |
 | iq-canvas | iq-painter | ⚪ Planned | 일러스트 시리즈 |
 | iq-stream | iq-studio | ⚪ Planned | 기술 영상 채널 |
 
-각 시스템은 도구의 **첫 번째 검증 사례**입니다. iq-proof가 iq-blogger의 검증이듯, 각 운영 시스템은 그 도구가 실제로 작동한다는 증거가 됩니다.
+각 시스템은 도구의 **첫 번째 검증 사례**입니다. iq-proof가 iq-blogger의 검증이듯, leetcode-solutions가 iq-leetbuddy의 검증이며, 각 운영 시스템은 그 도구가 실제로 작동한다는 증거가 됩니다.
 
 ---
 
@@ -235,16 +270,33 @@ graph TD
 
 </details>
 
+<details>
+<summary>&nbsp;🖥️ &nbsp;<b>Desktop Agents</b> &nbsp;&nbsp;<img src="https://img.shields.io/badge/2_planned-fce4ec?style=flat-square&color=cc785c"/></summary>
+
+<br/>
+
+> 로컬에서 동작하는 에이전트의 설계와 배포 (iq-leetbuddy의 후속 연구)
+
+| &nbsp; | 📌 Title | 📝 Key Topics |
+|:--:|:---------|:----------|
+| 1 | **Electron Agent Patterns Deep Dive** | Main/Renderer 분리, IPC progress streaming, secret-safe view, 영속 세션 |
+| 2 | **Local-first Agent Deployment Deep Dive** | electron-builder, 코드 서명 우회, OS keychain, 자동 업데이트, GitHub Actions 매트릭스 빌드 |
+
+<br/>
+
+</details>
+
 ### New Tools — 우선순위
 
 도구 확장 순서:
 
-1. **iq-blogger 안정화** — 첫 도구의 완성도를 100%로
-2. **iq-writer / iq-painter** — 텍스트·이미지 도메인 확장
-3. **iq-label / iq-studio** — 멀티미디어 도메인 진입
-4. **iq-curator** — 모든 도구의 통합 오케스트레이터
+1. ~~**iq-blogger 안정화**~~ ✓ 운영 중 (iq-proof로 검증)
+2. ~~**iq-leetbuddy 출하**~~ ✓ 데스크톱 에이전트 첫 사례 (v0.3.4 발행)
+3. **iq-writer / iq-painter** — 텍스트·이미지 도메인 확장
+4. **iq-label / iq-studio** — 멀티미디어 도메인 진입
+5. **iq-curator** — 모든 도구의 통합 오케스트레이터
 
-각 단계는 이전 도구의 **운영 메트릭**으로 검증된 후에만 다음으로 진행합니다.
+각 단계는 이전 도구의 **운영 메트릭**으로 검증된 후에만 다음으로 진행합니다. iq-blogger의 텍스트 양산 패턴과 iq-leetbuddy의 데스크톱 운영 패턴 — 두 갈래의 경험이 그다음 도구 선택에 반영됩니다.
 
 ---
 
@@ -276,6 +328,8 @@ graph LR
 | 👤 **Curate** | 인간이 최종 품질 확인 + 발행 결정 |
 
 이 다섯 단계는 도메인이 텍스트든 음악이든 이미지든 동일하게 적용됩니다. **검증·재시도·큐레이션의 추상화 패턴**이 도메인 간 전이의 핵심입니다.
+
+iq-leetbuddy는 이 사이클이 *데스크톱 환경*에서도 동일하게 작동함을 보여준 첫 사례입니다 — Study(LeetCode 사용 패턴 분석) → Constrain(번역 + 회고 프롬프트 규칙) → Generate(Claude API) → Validate(친절한 에러 + 자동 복구) → Curate(사용자가 통과 코드 확인 후 업로드).
 
 <br/>
 
