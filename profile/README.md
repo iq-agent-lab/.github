@@ -60,12 +60,25 @@ Deep-dive 문서를 블로그 포스트로 자동 변환하는 에이전트.
 LeetCode 풀이를 한국어로 번역하고, AI 회고를 붙여 GitHub에 자동 정리하는 **데스크톱 에이전트**.
 
 **Pipeline**
-- Input: 문제 URL / slug / 이름
-- Process: 한국어 번역 → 풀이 → AI 회고 (복잡도·대안·유사문제) → atomic commit
-- Output: 학습 자산으로 정리된 풀이 레포
 
-**검증** · 입력 fuzzy matching, GitHub 자동 진단, 언어별 폴더 분리
-**현재** · v0.3.4 [Releases](https://github.com/iq-agent-lab/iq-leetbuddy/releases/latest) — macOS / Windows / Linux 빌드 자동 배포
+- Input — URL · slug · 이름 · 번호 · 임베드 chip · 최근 풀이 (다중 진입)
+- Process — streaming 번역 → 직접 풀이 (submission 자동 가져오기) → streaming 회고 → atomic commit + root README 인덱스 자동 갱신
+- Output — 인덱스 있는 학습 노트 레포 + 풀이 통계 dashboard
+
+**검증**
+
+- LeetCode Accepted 사전 확인 (override 가능)
+- 친절한 에러 + 자동 복구
+- 회고 사후 편집
+- draft 자동 저장
+
+**현재** · [v0.8.0 Releases](https://github.com/iq-agent-lab/iq-leetbuddy/releases/latest)
+
+- Dark / Light / System 테마
+- CodeMirror 에디터
+- OS keychain 통합
+- 새 버전 footer pill 알림
+- macOS / Windows / Linux 자동 빌드
 
 </td>
 </tr>
