@@ -85,6 +85,38 @@ LeetCode 풀이를 한국어로 번역하고, AI 회고를 붙여 GitHub에 자�
 <tr>
 <td width="50%" valign="top">
 
+### 📶 iq-wifi-snap
+![Status](https://img.shields.io/badge/status-active-22c55e?style=flat-square)
+
+**도메인** · 일상 유틸리티 (와이파이 추출·공유·접속)
+
+카페 와이파이 카드를 사진 한 장으로 찍으면 Claude Vision이 SSID/PW를 추출해 QR · OS 명령어 · 딥링크로 변환하는 **PWA 유틸리티 에이전트**. 백엔드 0, BYO API key.
+
+**Pipeline**
+
+- Input — 와이파이 카드 사진 / 영수증 / 메뉴판 / 스티커 / 손글씨
+- Process — Claude Vision 추출 → 자동 폴백 (Tesseract.js 한/영 OCR + 로컬 라벨 파서) → QR 코드 + macOS/Win/Linux 명령어 + base64 딥링크 생성
+- Output — 즉시 접속 QR · 데스크톱 CLI 호환 URL · 시스템/카톡 공유 카드 · `wifi-snap://` 딥링크
+
+**검증**
+
+- 추출 신뢰도 표시 (high / medium / low)
+- 직접 편집 + QR 즉시 갱신
+- 한국어/영문 카페 카드 회귀 테스트 (Modern · Handwritten · Minimal)
+- 오프라인 OCR 폴백으로 인터넷 없을 때도 동작
+- 추출당 비용 ~$0.001 (Haiku 4.5)
+
+**현재** · [v0.12.0 Live Demo](https://iq-agent-lab.github.io/iq-wifi-snap/)
+
+- 데스크톱 CLI (macOS/Linux/Windows) — `curl | bash` 한 줄 설치
+- `wifi-snap://` 커스텀 URL 스킴 — 어디서든 클릭만으로 자동 연결
+- 🔊 초음파/오디오 전송 (ggwave) — 인터넷·BT·페어링 0 폰→PC 전송
+- 속도 측정 (Cloudflare) + 카페 지도 (Leaflet/OSM)
+- 카카오톡 SDK 직접 공유 + PWA 오프라인 모드
+
+</td>
+<td width="50%" valign="top">
+
 ### 🎵 iq-label
 ![Status](https://img.shields.io/badge/status-planned-9ca3af?style=flat-square)
 
@@ -101,6 +133,8 @@ LeetCode 풀이를 한국어로 번역하고, AI 회고를 붙여 GitHub에 자�
 **계획** · 첫 운영: 인디 음악 레이블
 
 </td>
+</tr>
+<tr>
 <td width="50%" valign="top">
 
 ### ✍️ iq-writer
@@ -119,8 +153,6 @@ LeetCode 풀이를 한국어로 번역하고, AI 회고를 붙여 GitHub에 자�
 **계획** · 단편소설 → 장편 → 시리즈
 
 </td>
-</tr>
-<tr>
 <td width="50%" valign="top">
 
 ### 🎨 iq-painter
@@ -139,6 +171,8 @@ LeetCode 풀이를 한국어로 번역하고, AI 회고를 붙여 GitHub에 자�
 **계획** · 블로그 일러스트 → 그림책 → 그래픽 노블
 
 </td>
+</tr>
+<tr>
 <td width="50%" valign="top">
 
 ### 🎬 iq-studio
@@ -157,8 +191,6 @@ LeetCode 풀이를 한국어로 번역하고, AI 회고를 붙여 GitHub에 자�
 **계획** · 기술 해설 영상부터
 
 </td>
-</tr>
-<tr>
 <td width="50%" valign="top">
 
 ### 🌐 iq-curator
@@ -177,6 +209,8 @@ LeetCode 풀이를 한국어로 번역하고, AI 회고를 붙여 GitHub에 자�
 **계획** · 모든 도구 통합 후 마지막 단계
 
 </td>
+</tr>
+<tr>
 <td width="50%" valign="top">
 
 ### 🔬 next planet
@@ -188,7 +222,12 @@ iq-agent-lab은 1년에 도구 한두 개씩 자라는 살아있는 시스템입
 
 다음 행성은 운영 메트릭과 새로운 학습 영역에 따라 결정됩니다.
 
-iq-blogger의 텍스트 양산이 안정되고, iq-leetbuddy의 학습 사이클이 다양한 문제로 검증되면, 그 다음 도메인이 자연스럽게 떠오를 것입니다.
+iq-blogger의 텍스트 양산이 안정되고, iq-leetbuddy의 학습 사이클이 다양한 문제로 검증되고, iq-wifi-snap의 일상 유틸리티 패턴이 누적되면, 그 다음 도메인이 자연스럽게 떠오를 것입니다.
+
+</td>
+<td width="50%" valign="top">
+
+&nbsp;
 
 </td>
 </tr>
@@ -220,10 +259,10 @@ graph TD
 | Stage | 활동 | 산출물 |
 |-------|------|--------|
 | 📚 **Research** | 도메인별 deep-dive, 시스템 패턴 추출 | 연구 레포 |
-| 🛠️ **Tools** | 이론을 동작하는 도구로 구현 | iq-blogger, iq-leetbuddy 등 |
-| 🚀 **Operations** | 도구를 실제 운영 시스템으로 통합 | iq-proof, leetcode-solutions 등 |
+| 🛠️ **Tools** | 이론을 동작하는 도구로 구현 | iq-blogger, iq-leetbuddy, iq-wifi-snap 등 |
+| 🚀 **Operations** | 도구를 실제 운영 시스템으로 통합 | iq-proof, leetcode-solutions, iq-wifi-snap PWA 등 |
 
-운영 경험은 다시 새로운 연구 질문이 됩니다. 글 1개를 만드는 것과 500개를 만드는 것은 본질적으로 다른 문제이고, 한 도메인을 자동화한 경험은 다른 도메인의 설계에 적용됩니다. iq-blogger에서 만든 *컨스트레인트 + 검증 + 재시도* 패턴이 iq-leetbuddy에서 *친절한 에러 + 자동 복구* 패턴으로 진화한 것이 좋은 예시입니다.
+운영 경험은 다시 새로운 연구 질문이 됩니다. 글 1개를 만드는 것과 500개를 만드는 것은 본질적으로 다른 문제이고, 한 도메인을 자동화한 경험은 다른 도메인의 설계에 적용됩니다. iq-blogger에서 만든 *컨스트레인트 + 검증 + 재시도* 패턴이 iq-leetbuddy에서 *친절한 에러 + 자동 복구* 패턴으로, iq-wifi-snap에서 *Vision 추출 + 오프라인 OCR 폴백* 패턴으로 진화한 흐름이 좋은 예시입니다.
 
 ---
 
@@ -235,12 +274,13 @@ graph TD
 |--------|------|------|-----------|
 | [iq-proof](https://iq-proof.github.io) | iq-blogger | 🟢 Active | 500+ posts (target) |
 | [leetcode-solutions](https://github.com/e9ua1/leetcode-solutions) | iq-leetbuddy | 🟢 Active | 풀이 + 한국어 회고 누적 |
+| [iq-wifi-snap](https://iq-agent-lab.github.io/iq-wifi-snap/) | iq-wifi-snap | 🟢 Active | v0.12.0 출하, 일상 유틸리티 자동화 사례 |
 | iq-label sound | iq-label | ⚪ Planned | 인디 음악 레이블 |
 | iq-narrative | iq-writer | ⚪ Planned | 단편 소설 시리즈 |
 | iq-canvas | iq-painter | ⚪ Planned | 일러스트 시리즈 |
 | iq-stream | iq-studio | ⚪ Planned | 기술 영상 채널 |
 
-각 시스템은 도구의 **첫 번째 검증 사례**입니다. iq-proof가 iq-blogger의 검증이듯, leetcode-solutions가 iq-leetbuddy의 검증이며, 각 운영 시스템은 그 도구가 실제로 작동한다는 증거가 됩니다.
+각 시스템은 도구의 **첫 번째 검증 사례**입니다. iq-proof가 iq-blogger의 검증이듯, leetcode-solutions가 iq-leetbuddy의 검증이며, iq-wifi-snap PWA가 자기 자신의 검증이기도 합니다. 각 운영 시스템은 그 도구가 실제로 작동한다는 증거가 됩니다.
 
 ---
 
@@ -305,11 +345,12 @@ graph TD
 
 1. ~~**iq-blogger 안정화**~~ ✓ 운영 중 (iq-proof로 검증)
 2. ~~**iq-leetbuddy 출하**~~ ✓ 데스크톱 에이전트 첫 사례 (v0.3.4 발행)
-3. **iq-writer / iq-painter** — 텍스트·이미지 도메인 확장
-4. **iq-label / iq-studio** — 멀티미디어 도메인 진입
-5. **iq-curator** — 모든 도구의 통합 오케스트레이터
+3. ~~**iq-wifi-snap 출하**~~ ✓ 일상 유틸리티 에이전트 첫 사례 (v0.12.0 발행)
+4. **iq-writer / iq-painter** — 텍스트·이미지 도메인 확장
+5. **iq-label / iq-studio** — 멀티미디어 도메인 진입
+6. **iq-curator** — 모든 도구의 통합 오케스트레이터
 
-각 단계는 이전 도구의 **운영 메트릭**으로 검증된 후에만 다음으로 진행합니다. iq-blogger의 텍스트 양산 패턴과 iq-leetbuddy의 데스크톱 운영 패턴 — 두 갈래의 경험이 그다음 도구 선택에 반영됩니다.
+각 단계는 이전 도구의 **운영 메트릭**으로 검증된 후에만 다음으로 진행합니다. iq-blogger의 텍스트 양산 패턴, iq-leetbuddy의 데스크톱 운영 패턴, iq-wifi-snap의 PWA·CLI 듀얼 폼팩터 패턴 — 세 갈래의 경험이 그다음 도구 선택에 반영됩니다.
 
 ---
 
@@ -343,6 +384,8 @@ graph LR
 이 다섯 단계는 도메인이 텍스트든 음악이든 이미지든 동일하게 적용됩니다. **검증·재시도·큐레이션의 추상화 패턴**이 도메인 간 전이의 핵심입니다.
 
 iq-leetbuddy는 이 사이클이 *데스크톱 환경*에서도 동일하게 작동함을 보여준 첫 사례입니다 — Study(LeetCode 사용 패턴 분석) → Constrain(번역 + 회고 프롬프트 규칙) → Generate(Claude API) → Validate(친절한 에러 + 자동 복구) → Curate(사용자가 통과 코드 확인 후 업로드).
+
+iq-wifi-snap은 이 패턴이 *일상 유틸리티 도메인*에도 적용됨을 확장한 사례입니다 — Study(카페 와이파이 카드 시각 패턴 분석) → Constrain(JSON 스키마 + 한국어/영문 라벨 파서) → Generate(Claude Vision API) → Validate(신뢰도 표시 + 회귀 테스트 + 오프라인 OCR 폴백) → Curate(사용자가 추출 결과 확인 + QR 직접 편집 + 즉시 갱신). 같은 사이클이 *서버 0, 백엔드 0, BYO API key*의 정적 PWA 형태로도 성립함을 증명합니다.
 
 <br/>
 
