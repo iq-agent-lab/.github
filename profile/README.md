@@ -20,7 +20,7 @@
 
 <br/>
 
-[![IQ Lab Blog](https://img.shields.io/badge/📝_Read_on_IQ_Lab_Blog-iq--proof.github.io-00d9ff?style=for-the-badge&logo=astro&logoColor=white)](https://iq-proof.github.io)
+[![IQ Blog](https://img.shields.io/badge/📝_Read_on_IQ_Lab_Blog-iq--blog.github.io-00d9ff?style=for-the-badge&logo=astro&logoColor=white)](https://iq-universe.github.io/iq-blog/)
 
 </div>
 
@@ -47,37 +47,41 @@ Deep-dive 문서를 블로그 포스트로 자동 변환하는 에이전트.
 - Output: 발행 가능한 MDX 포스트
 
 **검증** · Zod schema, 링크 정합성, 코드 syntax
-**현재** · 첫 검증 사례 [iq-proof](https://iq-proof.github.io)에서 운영
+**현재** · 첫 검증 사례 [iq-blog](https://iq-universe.github.io/iq-blog/)에서 운영
 
 </td>
 <td width="50%" valign="top">
 
-### 🪐 iq-leetbuddy
+### 🪐 Solve Buddy
 ![Status](https://img.shields.io/badge/status-active-22c55e?style=flat-square)
 
-**도메인** · 학습 자동화 (LeetCode 풀이)
+**도메인** · 학습 자동화 (LeetCode · 프로그래머스 · AtCoder · Codeforces)
 
-LeetCode 풀이를 한국어로 번역하고, AI 회고를 붙여 GitHub에 자동 정리하는 **데스크톱 에이전트**.
+4개 플랫폼 풀이를 한국어로 정리/번역하고, AI 회고를 붙여 GitHub에 자동 정리하는 **데스크톱 에이전트**. 한국어 원문(프로그래머스)은 cheerio 정리, 영어/일본어(LC/AC/CF)는 Claude streaming 번역.
 
 **Pipeline**
 
-- Input — URL · slug · 이름 · 번호 · 임베드 chip · 최근 풀이 (다중 진입)
-- Process — streaming 번역 → 직접 풀이 (submission 자동 가져오기) → streaming 회고 → atomic commit + root README 인덱스 자동 갱신
-- Output — 인덱스 있는 학습 노트 레포 + 풀이 통계 dashboard
+- Input — 4개 플랫폼 URL · 임베드 chip · 최근 풀이 chip (플랫폼 badge 표시)
+- Process — 정리/번역 (LC·AC·CF는 Claude streaming, PG는 cheerio + turndown 즉시 ~10ms) → 임베드 윈도우에서 직접 풀이 + submission 자동 가져오기 → streaming 회고 → atomic commit + 플랫폼별 폴더 + root README 인덱스 자동 갱신
+- Output — 플랫폼별 학습 노트 레포 + 풀이 통계 dashboard (플랫폼 탭 분리)
 
 **검증**
 
-- LeetCode Accepted 사전 확인 (override 가능)
+- Accepted 사전 확인 — LC / AC / CF (PG는 AC 개념 없어 미지원)
 - 친절한 에러 + 자동 복구
-- 회고 사후 편집
-- draft 자동 저장
+- 회고 사후 편집 (`fix:` commit)
+- draft 자동 저장 + 새 문제 fetch 시 editor 초기화
+- 캐시 schema versioning — 추출 로직 변경 시 자동 refresh
 
-**현재** · [v0.8.0 Releases](https://github.com/iq-agent-lab/iq-leetbuddy/releases/latest)
+**현재** · [v1.12.0 Releases](https://github.com/iq-agent-lab/iq-solvebuddy/releases/latest)
 
-- Dark / Light / System 테마
-- CodeMirror 에디터
-- OS keychain 통합
-- 새 버전 footer pill 알림
+- 4개 플랫폼 풀 패리티 (임베드 + submission 자동 fetch)
+- 임베드 윈도우 추상화 — `EmbedController` 1개 + 4개 config
+- Gist 백업 디바이스 sync (private gist, newest savedAt wins)
+- CodeMirror Cmd+F 검색 + 코드 fold + line wrap toggle
+- KaTeX 수식 렌더링 (한국어 boundary 대응)
+- AtCoder Problems 색깔 체계 (회색 → 갈색 → 녹색 → 청색 → 황색 → 주황 → 적색 → 레전드)
+- Dark / Light / System 테마 · OS keychain · 자동 업데이트 polling
 - macOS / Windows / Linux 자동 빌드
 
 </td>
@@ -222,7 +226,7 @@ iq-agent-lab은 1년에 도구 한두 개씩 자라는 살아있는 시스템입
 
 다음 행성은 운영 메트릭과 새로운 학습 영역에 따라 결정됩니다.
 
-iq-blogger의 텍스트 양산이 안정되고, iq-leetbuddy의 학습 사이클이 다양한 문제로 검증되고, iq-wifi-snap의 일상 유틸리티 패턴이 누적되면, 그 다음 도메인이 자연스럽게 떠오를 것입니다.
+iq-blogger의 텍스트 양산이 안정되고, Solve Buddy의 학습 사이클이 4개 플랫폼에서 검증되고, iq-wifi-snap의 일상 유틸리티 패턴이 누적되면, 그 다음 도메인이 자연스럽게 떠오를 것입니다.
 
 </td>
 <td width="50%" valign="top">
@@ -239,6 +243,7 @@ iq-blogger의 텍스트 양산이 안정되고, iq-leetbuddy의 학습 사이클
 
 도구는 독립적이지만, 시스템으로서 순환합니다.
 
+
 ```mermaid
 graph TD
     R["📚 Research<br/>이론·패턴 정리"]
@@ -254,15 +259,17 @@ graph TD
     style O fill:#e8f5e9,stroke:#cc785c,stroke-width:2px
 ```
 
+
+
 세 단계가 순환하는 구조입니다.
 
 | Stage | 활동 | 산출물 |
 |-------|------|--------|
 | 📚 **Research** | 도메인별 deep-dive, 시스템 패턴 추출 | 연구 레포 |
-| 🛠️ **Tools** | 이론을 동작하는 도구로 구현 | iq-blogger, iq-leetbuddy, iq-wifi-snap 등 |
-| 🚀 **Operations** | 도구를 실제 운영 시스템으로 통합 | iq-proof, leetcode-solutions, iq-wifi-snap PWA 등 |
+| 🛠️ **Tools** | 이론을 동작하는 도구로 구현 | iq-blogger, Solve Buddy, iq-wifi-snap 등 |
+| 🚀 **Operations** | 도구를 실제 운영 시스템으로 통합 | iq-blog, algorithm-solutions, iq-wifi-snap PWA 등 |
 
-운영 경험은 다시 새로운 연구 질문이 됩니다. 글 1개를 만드는 것과 500개를 만드는 것은 본질적으로 다른 문제이고, 한 도메인을 자동화한 경험은 다른 도메인의 설계에 적용됩니다. iq-blogger에서 만든 *컨스트레인트 + 검증 + 재시도* 패턴이 iq-leetbuddy에서 *친절한 에러 + 자동 복구* 패턴으로, iq-wifi-snap에서 *Vision 추출 + 오프라인 OCR 폴백* 패턴으로 진화한 흐름이 좋은 예시입니다.
+운영 경험은 다시 새로운 연구 질문이 됩니다. 글 1개를 만드는 것과 500개를 만드는 것은 본질적으로 다른 문제이고, 한 도메인을 자동화한 경험은 다른 도메인의 설계에 적용됩니다. iq-blogger에서 만든 *컨스트레인트 + 검증 + 재시도* 패턴이 Solve Buddy에서 *친절한 에러 + 자동 복구 + 멀티 플랫폼 추상화* 패턴으로, iq-wifi-snap에서 *Vision 추출 + 오프라인 OCR 폴백* 패턴으로 진화한 흐름이 좋은 예시입니다.
 
 ---
 
@@ -272,15 +279,15 @@ graph TD
 
 | 시스템 | 도구 | 상태 | 첫 메트릭 |
 |--------|------|------|-----------|
-| [iq-proof](https://iq-proof.github.io) | iq-blogger | 🟢 Active | 500+ posts (target) |
-| [leetcode-solutions](https://github.com/e9ua1/leetcode-solutions) | iq-leetbuddy | 🟢 Active | 풀이 + 한국어 회고 누적 |
+| [iq-blog](https://iq-universe.github.io/iq-blog/) | iq-blogger | 🟢 Active | 500+ posts (target) |
+| [algorithm-solutions](https://github.com/e9ua1/leetcode-solutions) | Solve Buddy | 🟢 Active | 4개 플랫폼 풀이 + 한국어 회고 누적 |
 | [iq-wifi-snap](https://iq-agent-lab.github.io/iq-wifi-snap/) | iq-wifi-snap | 🟢 Active | v0.12.0 출하, 일상 유틸리티 자동화 사례 |
 | iq-label sound | iq-label | ⚪ Planned | 인디 음악 레이블 |
 | iq-narrative | iq-writer | ⚪ Planned | 단편 소설 시리즈 |
 | iq-canvas | iq-painter | ⚪ Planned | 일러스트 시리즈 |
 | iq-stream | iq-studio | ⚪ Planned | 기술 영상 채널 |
 
-각 시스템은 도구의 **첫 번째 검증 사례**입니다. iq-proof가 iq-blogger의 검증이듯, leetcode-solutions가 iq-leetbuddy의 검증이며, iq-wifi-snap PWA가 자기 자신의 검증이기도 합니다. 각 운영 시스템은 그 도구가 실제로 작동한다는 증거가 됩니다.
+각 시스템은 도구의 **첫 번째 검증 사례**입니다. iq-blog가 iq-blogger의 검증이듯, algorithm-solutions가 Solve Buddy의 검증이며, iq-wifi-snap PWA가 자기 자신의 검증이기도 합니다. 각 운영 시스템은 그 도구가 실제로 작동한다는 증거가 됩니다.
 
 ---
 
@@ -328,11 +335,11 @@ graph TD
 
 <br/>
 
-> 로컬에서 동작하는 에이전트의 설계와 배포 (iq-leetbuddy의 후속 연구)
+> 로컬에서 동작하는 에이전트의 설계와 배포 (Solve Buddy의 후속 연구)
 
 | &nbsp; | 📌 Title | 📝 Key Topics |
 |:--:|:---------|:----------|
-| 1 | **Electron Agent Patterns Deep Dive** | Main/Renderer 분리, IPC progress streaming, secret-safe view, 영속 세션 |
+| 1 | **Electron Agent Patterns Deep Dive** | Main/Renderer 분리, IPC progress streaming, secret-safe view, 영속 세션, 멀티 임베드 윈도우 추상화 |
 | 2 | **Local-first Agent Deployment Deep Dive** | electron-builder, 코드 서명 우회, OS keychain, 자동 업데이트, GitHub Actions 매트릭스 빌드 |
 
 <br/>
@@ -343,20 +350,21 @@ graph TD
 
 도구 확장 순서:
 
-1. ~~**iq-blogger 안정화**~~ ✓ 운영 중 (iq-proof로 검증)
-2. ~~**iq-leetbuddy 출하**~~ ✓ 데스크톱 에이전트 첫 사례 (v0.3.4 발행)
+1. ~~**iq-blogger 안정화**~~ ✓ 운영 중 (iq-blog로 검증)
+2. ~~**Solve Buddy 출하**~~ ✓ 데스크톱 에이전트 첫 사례 (v1.12.0 발행, 4개 플랫폼 풀 패리티)
 3. ~~**iq-wifi-snap 출하**~~ ✓ 일상 유틸리티 에이전트 첫 사례 (v0.12.0 발행)
 4. **iq-writer / iq-painter** — 텍스트·이미지 도메인 확장
 5. **iq-label / iq-studio** — 멀티미디어 도메인 진입
 6. **iq-curator** — 모든 도구의 통합 오케스트레이터
 
-각 단계는 이전 도구의 **운영 메트릭**으로 검증된 후에만 다음으로 진행합니다. iq-blogger의 텍스트 양산 패턴, iq-leetbuddy의 데스크톱 운영 패턴, iq-wifi-snap의 PWA·CLI 듀얼 폼팩터 패턴 — 세 갈래의 경험이 그다음 도구 선택에 반영됩니다.
+각 단계는 이전 도구의 **운영 메트릭**으로 검증된 후에만 다음으로 진행합니다. iq-blogger의 텍스트 양산 패턴, Solve Buddy의 데스크톱 + 멀티 플랫폼 운영 패턴, iq-wifi-snap의 PWA·CLI 듀얼 폼팩터 패턴 — 세 갈래의 경험이 그다음 도구 선택에 반영됩니다.
 
 ---
 
 ## 🛠️ Build Method
 
 각 도구는 동일한 사이클로 구축됩니다.
+
 
 ```mermaid
 graph LR
@@ -373,6 +381,7 @@ graph LR
     style E fill:#f3e5f5,stroke:#cc785c,stroke-width:2px
 ```
 
+
 | Step | Description |
 |------|-------------|
 | 🔬 **Study** | 도메인 분석, 기존 도구 조사, 패턴 추출 |
@@ -383,7 +392,7 @@ graph LR
 
 이 다섯 단계는 도메인이 텍스트든 음악이든 이미지든 동일하게 적용됩니다. **검증·재시도·큐레이션의 추상화 패턴**이 도메인 간 전이의 핵심입니다.
 
-iq-leetbuddy는 이 사이클이 *데스크톱 환경*에서도 동일하게 작동함을 보여준 첫 사례입니다 — Study(LeetCode 사용 패턴 분석) → Constrain(번역 + 회고 프롬프트 규칙) → Generate(Claude API) → Validate(친절한 에러 + 자동 복구) → Curate(사용자가 통과 코드 확인 후 업로드).
+Solve Buddy는 이 사이클이 *데스크톱 환경 + 멀티 플랫폼*에서도 동일하게 작동함을 보여준 사례입니다 — Study(4개 플랫폼 풀이 흐름 분석) → Constrain(플랫폼별 prompt + 정리 규칙 + 폴더 path) → Generate(Claude streaming + cheerio/turndown) → Validate(Accepted 사전 확인 + 친절 에러 + 캐시 schema versioning) → Curate(사용자가 통과 코드 확인 후 업로드 + 회고 사후 편집). 같은 사이클이 *한 플랫폼*에서 *4개 플랫폼*으로 확장되어도 핵심 추상화는 유지됩니다.
 
 iq-wifi-snap은 이 패턴이 *일상 유틸리티 도메인*에도 적용됨을 확장한 사례입니다 — Study(카페 와이파이 카드 시각 패턴 분석) → Constrain(JSON 스키마 + 한국어/영문 라벨 파서) → Generate(Claude Vision API) → Validate(신뢰도 표시 + 회귀 테스트 + 오프라인 OCR 폴백) → Curate(사용자가 추출 결과 확인 + QR 직접 편집 + 즉시 갱신). 같은 사이클이 *서버 0, 백엔드 0, BYO API key*의 정적 PWA 형태로도 성립함을 증명합니다.
 
@@ -432,7 +441,7 @@ iq-wifi-snap은 이 패턴이 *일상 유틸리티 도메인*에도 적용됨을
 
 <br/>
 
-검증된 결과물과 시스템 설계 회고는 [**IQ Lab Blog**](https://iq-proof.github.io)에 발행됩니다.
+검증된 결과물과 시스템 설계 회고는 [**IQ Blog**](https://iq-universe.github.io/iq-blog/)에 발행됩니다.
 
 <br/>
 
